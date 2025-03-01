@@ -1,0 +1,17 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend for Uber Clone App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "backend",
+    "fullstack",
+    "MERN",
+    "WebDev"
+  ],
+  "author": "pranulkbv28",
+  "license": "ISC"
+}
