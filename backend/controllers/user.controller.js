@@ -1,3 +1,4 @@
+import { cookieOptions } from "../constants.js";
 import User from "../models/user.model.js";
 import {
   ErrorApiResponse,
@@ -38,12 +39,19 @@ export const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
+    const token = await user.generateAuthToken();
+
     const createdUser = await User.findById(user._id).select("-password");
 
     return res
       .status(201)
+      .cookie("token", token, cookieOptions)
       .json(
-        new SuccessApiResponse(201, createdUser, "User created successfully")
+        new SuccessApiResponse(
+          201,
+          { createdUser, token },
+          "User created successfully"
+        )
       );
   } catch (error) {
     throw new ErrorApiResponse(
@@ -74,12 +82,19 @@ export const loginUser = async (req, res) => {
       throw new ErrorApiResponse(401, "Invalid credentials");
     }
 
+    const token = await user.generateAuthToken();
+
     const loggedInUser = await User.findById(user._id).select("-password");
 
     return res
       .status(200)
+      .cookie("token", token, cookieOptions)
       .json(
-        new SuccessApiResponse(200, loggedInUser, "User logged in successfully")
+        new SuccessApiResponse(
+          200,
+          { loggedInUser, token },
+          "User logged in successfully"
+        )
       );
   } catch (error) {
     throw new ErrorApiResponse(

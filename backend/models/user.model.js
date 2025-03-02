@@ -48,15 +48,24 @@ const userSchema = new Schema(
 );
 
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
-    { _id: this._id },
-    process.env.JWT_SECRET
-    // {
-    //     expiresIn: "1d"
-    // }
-  );
+  // const token = jwt.sign(
+  //   { _id: this._id },
+  //   process.env.JWT_SECRET,
+  //   {
+  //       expiresIn: "1d"
+  //   }
+  // );
 
-  return token;
+  // return token;
+
+  const payload = {
+    _id: this._id,
+    email: this.email,
+  };
+
+  return jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
 };
 
 userSchema.methods.comparePassword = async function (enteredPassword) {
