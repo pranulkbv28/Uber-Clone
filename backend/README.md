@@ -112,6 +112,6 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
     "statusCode": Number,
     "message": String,
     "data": {},
-    "success": Booleans
+    "success": Boolean
 }
 ```
