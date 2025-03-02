@@ -102,7 +102,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 }
 ```
 
-### Logout - `/logout`
+#### Logout - `/logout`
 
 - **METHOD**: `POST`
 - **RESPONSE**:
