@@ -103,3 +103,21 @@ export const loginUser = async (req, res) => {
     );
   }
 };
+
+export const logoutUser = async (req, res) => {
+  try {
+    if (!req.user) {
+      throw new ErrorApiResponse(401, "Unauthorized request");
+    }
+
+    return res
+      .status(200)
+      .clearCookie("token")
+      .json(new SuccessApiResponse(200, {}, "User logged out successfully"));
+  } catch (error) {
+    throw new ErrorApiResponse(
+      500,
+      `Something went wrong while logging out: ${error.message}`
+    );
+  }
+};
