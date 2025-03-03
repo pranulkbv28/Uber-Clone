@@ -64,7 +64,7 @@ userSchema.methods.generateAuthToken = function () {
   };
 
   return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: "1d",
+    expiresIn: "24h",
   });
 };
 

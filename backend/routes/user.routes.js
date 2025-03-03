@@ -1,15 +1,9 @@
-import express from "express";
-import {
-  createUser,
-  loginUser,
-  logoutUser,
-} from "../controllers/user.controller.js";
+import express from "express"
 import verifyJWT from "../middlewares/user.middleware.js";
+import { getUserProfile } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-router.post("/create", createUser);
-router.post("/login", loginUser);
-router.post("logout", verifyJWT, logoutUser);
+router.get("/profile", verifyJWT, getUserProfile)
 
-export default router;
+export default router
