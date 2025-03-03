@@ -130,8 +130,6 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 }
 ```
 
-### User - `/api/v1/user`
-
 #### Get Profile - `/profile`
 
 - **METHOD**: `GET`
