@@ -114,7 +114,7 @@ export const logoutUser = async (req, res) => {
     const token =
       req.cookies?.token || req.header("Authorization").split(" ")[1];
 
-    await Blacklist.create({ token })
+    await Blacklist.create({ token });
 
     return res
       .status(200)
@@ -129,5 +129,13 @@ export const logoutUser = async (req, res) => {
 };
 
 export const getUserProfile = async (req, res) => {
-  res.status(200).json(new SuccessApiResponse(200, { user: req.user }, "User profile fetched successfully!!"))
-}
+  res
+    .status(200)
+    .json(
+      new SuccessApiResponse(
+        200,
+        { user: req.user },
+        "User profile fetched successfully!!"
+      )
+    );
+};

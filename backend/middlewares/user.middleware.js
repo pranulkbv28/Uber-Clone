@@ -1,6 +1,6 @@
-import Blacklist from "../models/blacklist.model";
-import User from "../models/user.model";
-import { ErrorApiResponse } from "../services/ApiResponse.service";
+import Blacklist from "../models/blacklist.model.js";
+import User from "../models/user.model.js";
+import { ErrorApiResponse } from "../services/ApiResponse.service.js";
 import jwt from "jsonwebtoken";
 
 const verifyJWTUser = async (req, resizeBy, next) => {
@@ -12,8 +12,7 @@ const verifyJWTUser = async (req, resizeBy, next) => {
 
     const isBlacklisted = await Blacklist.findOne({ token });
 
-    if (isBlacklisted)
-      throw new ErrorApiResponse(401, "Unauthorized request!");
+    if (isBlacklisted) throw new ErrorApiResponse(401, "Unauthorized request!");
 
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
