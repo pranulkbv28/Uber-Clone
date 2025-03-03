@@ -54,15 +54,18 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 {
     "statusCode": Number,
     "data": {
-        "fullname": {
-            "firstname": String,
-            "lastname": String
+        "createdUser": {
+            "fullname": {
+                "firstname": String,
+                "lastname": String
+            },
+            "_id": String,
+            "email": String,
+            "createdAt": String,
+            "updatedAt": String,
+            "__v": Number
         },
-        "_id": String,
-        "email": String,
-        "createdAt": String,
-        "updatedAt": String,
-        "__v": Number
+        "token": String. 
     },
     "message": String,
     "success": Boolean
@@ -87,15 +90,18 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 {
     "statusCode": Number,
     "data": {
-        "fullname": {
-            "firstname": String,
-            "lastname": String
+        "loggedInUser": {
+            "fullname": {
+                "firstname": String,
+                "lastname": String
+            },
+            "_id": String,
+            "email": String,
+            "createdAt": String,
+            "updatedAt": String,
+            "__v": Number
         },
-        "_id": String,
-        "email": String,
-        "createdAt": String,
-        "updatedAt": String,
-        "__v": Number
+        "token": String. 
     },
     "message": String,
     "success": Boolean
@@ -152,6 +158,64 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
         "createdAt": String,
         "updatedAt": String,
         "__v": Number
+    },
+    "message": String,
+    "success": Boolean
+}
+```
+
+### Captain - `/api/v1/captain`
+
+#### Create Captain - `/create-captain`
+
+- **METHOD**: `POST`
+- **BODY**:
+
+```json
+{
+    "fullname": {
+        "firstname": String,
+        "lastname": String
+    },
+    "email": String,
+    "password": String,
+    "vehicle": {
+        "vehicleType": String,
+        "color": String,
+        "numberPlate": String,
+        "capacity": Number,
+    }
+}
+```
+
+- **RESPONSE**:
+
+```json
+{
+    "statusCode": Number,
+    "data": {
+        "createdCaptain": {
+            "fullname": {
+                "firstname": String,
+                "lastname": String
+            },
+            "_id": String,
+            "email": String,
+            "createdAt": String,
+            "vehicle": {
+                "vehicleType": String,
+                "color": String,
+                "numberPlate": String,
+                "capacity": Number,
+                "_id": String,
+                "createdAt": String,
+                "updatedAt": String,
+                "__v": Number
+            },
+            "updatedAt": String,
+            "__v": Number
+        },
+        "token": String,
     },
     "message": String,
     "success": Boolean
