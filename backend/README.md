@@ -137,7 +137,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 
 ```json
 {
-    "Authorization": String
+    "Authorization": String // or from cookies
 }
 ```
 
