@@ -105,6 +105,14 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 #### Logout - `/logout`
 
 - **METHOD**: `POST`
+- **HEADERS**:
+
+```json
+{
+    "Authorization": String
+}
+```
+
 - **RESPONSE**:
 
 ```json
@@ -112,6 +120,40 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
     "statusCode": Number,
     "message": String,
     "data": {},
+    "success": Boolean
+}
+```
+
+### User - `/api/v1/user`
+
+#### Get Profile - `/profile`
+
+- **METHOD**: `GET`
+- **HEADERS**:
+
+```json
+{
+    "Authorization": String
+}
+```
+
+- **RESPONSE**:
+
+```json
+{
+    "statusCode": Number,
+    "user": {
+        "fullname": {
+            "firstname": String,
+            "lastname": String
+        },
+        "_id": String,
+        "email": String,
+        "createdAt": String,
+        "updatedAt": String,
+        "__v": Number
+    },
+    "message": String,
     "success": Boolean
 }
 ```
