@@ -3,7 +3,7 @@ import User from "../models/user.model";
 import { ErrorApiResponse } from "../services/ApiResponse.service";
 import jwt from "jsonwebtoken";
 
-const verifyJWT = async (req, resizeBy, next) => {
+const verifyJWTUser = async (req, resizeBy, next) => {
   try {
     const token =
       req.cookies?.token || req.header("Authorization").split(" ")[1];
@@ -28,4 +28,4 @@ const verifyJWT = async (req, resizeBy, next) => {
   }
 };
 
-export default verifyJWT;
+export default verifyJWTUser;
