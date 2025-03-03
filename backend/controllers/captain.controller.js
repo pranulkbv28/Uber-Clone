@@ -4,8 +4,9 @@ import {
   ErrorApiResponse,
   SuccessApiResponse,
 } from "../services/ApiResponse.service.js";
+import fieldValidation from "../services/fieldsValidator.service.js";
 
-export const loginCaptain = async (req, res) => {
+export const registerCaptain = async (req, res) => {
   try {
     const {
       fullname,
@@ -91,4 +92,95 @@ export const loginCaptain = async (req, res) => {
         )
       );
   }
+};
+
+export const loginCaptain = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const isValidRequest = fieldValidation({ email, password });
+
+    if (!isValidRequest)
+      throw res
+        .status(400)
+        .json(new ErrorApiResponse(400, "All fields are required!!"));
+
+    const captain = await Captain.findOne({ email });
+
+    if (!captain)
+      throw res
+        .status(404)
+        .json(new ErrorApiResponse(404, "Captain not found!!"));
+
+    const isPasswordValid = await captain.comparePassword(password);
+
+    if (!isPasswordValid)
+      throw res
+        .status(401)
+        .json(new ErrorApiResponse(401, "Invalid credentials!!"));
+
+    const loggedInCaptain = await Captain.findById(captain._id).select(
+      "-password"
+    );
+
+    const token = await captain.generateAuthToken();
+
+    return res
+      .status(200)
+      .json(
+        new SuccessApiResponse(
+          200,
+          { loggedInCaptain, token },
+          "Captain logged in successfully!!"
+        )
+      );
+  } catch (error) {
+    return res
+      .status(500)
+      .json(
+        new ErrorApiResponse(
+          500,
+          `Something went wrong while logging in a captain: ${error.message}`
+        )
+      );
+  }
+};
+
+export const logoutCaptain = async (req, res) => {
+  try {
+    if (!req.user) {
+      throw new ErrorApiResponse(401, "Unauthorized request");
+    }
+
+    const token =
+      req.cookies?.token || req.header("Authorization").split(" ")[1];
+
+    await Blacklist.create({ token });
+
+    return res
+      .status(200)
+      .clearCookie("token")
+      .json(new SuccessApiResponse(200, {}, "Captain logged out successfully"));
+  } catch (error) {
+    return res
+      .status(500)
+      .json(
+        new ErrorApiResponse(
+          500,
+          `Something went wrong while logging in a captain: ${error.message}`
+        )
+      );
+  }
+};
+
+export const getCaptainProfile = async (req, res) => {
+  res
+    .status(200)
+    .json(
+      new SuccessApiResponse(
+        200,
+        { captain: req.user },
+        "Captain profile retrieved successfully"
+      )
+    );
 };

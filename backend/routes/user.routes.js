@@ -5,13 +5,13 @@ import {
   logoutUser,
   getUserProfile,
 } from "../controllers/user.controller.js";
-import verifyJWTUser from "../middlewares/user.middleware.js";
+import verifyJWT from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
 router.post("/create", createUser);
 router.post("/login", loginUser);
-router.post("logout", verifyJWTUser, logoutUser);
-router.get("/profile", verifyJWTUser, getUserProfile);
+router.post("logout", verifyJWT, logoutUser);
+router.get("/profile", verifyJWT, getUserProfile);
 
 export default router;

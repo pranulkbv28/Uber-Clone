@@ -3,7 +3,7 @@ import User from "../models/user.model.js";
 import { ErrorApiResponse } from "../services/ApiResponse.service.js";
 import jwt from "jsonwebtoken";
 
-const verifyJWTUser = async (req, resizeBy, next) => {
+const verifyJWT = async (req, _res, next) => {
   try {
     const token =
       req.cookies?.token || req.header("Authorization").split(" ")[1];
@@ -18,7 +18,7 @@ const verifyJWTUser = async (req, resizeBy, next) => {
 
     const user = await User.findById(decodedToken._id).select("-password");
 
-    if (!user) throw new ErrorApiResponse(401, "Invalid User Token!");
+    if (!user) throw new ErrorApiResponse(401, "Invalid Token!");
 
     req.user = user;
     next();
@@ -27,4 +27,4 @@ const verifyJWTUser = async (req, resizeBy, next) => {
   }
 };
 
-export default verifyJWTUser;
+export default verifyJWT;
