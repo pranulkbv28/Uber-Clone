@@ -30,9 +30,9 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 
 ## API Endpoints
 
-### Auth - `/api/v1/auth`
+### User - `/api/v1/auth`
 
-#### Create User - `/create`
+#### User Create - `/create`
 
 - **METHOD**: `POST`
 - **BODY**:
@@ -72,7 +72,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 }
 ```
 
-#### Login - `/login`
+#### User Login - `/login`
 
 - **METHOD**: `POST`
 - **BODY**:
@@ -108,7 +108,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 }
 ```
 
-#### Logout - `/logout`
+#### User Logout - `/logout`
 
 - **METHOD**: `POST`
 - **HEADERS**:
@@ -130,7 +130,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 }
 ```
 
-#### Get Profile - `/profile`
+#### Get User Profile - `/profile`
 
 - **METHOD**: `GET`
 - **HEADERS**:
@@ -164,7 +164,7 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
 
 ### Captain - `/api/v1/captain`
 
-#### Create Captain - `/create-captain`
+#### Captain Register - `/create-captain`
 
 - **METHOD**: `POST`
 - **BODY**:
@@ -214,6 +214,116 @@ This is the backend for the Uber Clone project. It is built using **Node.js**, *
             "__v": Number
         },
         "token": String,
+    },
+    "message": String,
+    "success": Boolean
+}
+```
+
+#### Captain Login - `/login-captain`
+
+- **METHOD**: `POST`
+- **BODY**:
+
+```json
+{
+    "email": String,
+    "password": String
+}
+```
+
+- **RESPONSE**:
+
+```json
+{
+    "statusCode": Number,
+    "data": {
+        "loggedInCaptain": {
+            "fullname": {
+                "firstname": String,
+                "lastname": String
+            },
+            "_id": String,
+            "email": String,
+            "createdAt": String,
+            "vehicle": {
+                "vehicleType": String,
+                "color": String,
+                "numberPlate": String,
+                "capacity": Number,
+                "_id": String,
+                "createdAt": String,
+                "updatedAt": String,
+                "__v": Number
+            },
+            "updatedAt": String,
+            "__v": Number
+        },
+        "token": String,
+    },
+    "message": String,
+    "success": Boolean
+}
+```
+
+#### Captain Logout - `/logout-captain`
+
+- **METHOD**: `POST`
+- **HEADERS**:
+
+```json
+{
+    "Authorization": String
+}
+```
+
+- **RESPONSE**:
+
+```json
+{
+    "statusCode": Number,
+    "message": String,
+    "data": {},
+    "success": Boolean
+}
+```
+
+#### Get Captain Profile - `/profile-captain`
+
+- **METHOD**: `GET`
+- **HEADERS**:
+
+```json
+{
+    "Authorization": String // or from cookies
+}
+```
+
+- **RESPONSE**:
+
+```json
+{
+    "statusCode": Number,
+    "captain": {
+        "fullname": {
+            "firstname": String,
+            "lastname": String
+        },
+        "_id": String,
+        "email": String,
+        "createdAt": String,
+        "vehicle": {
+            "vehicleType": String,
+            "color": String,
+            "numberPlate": String,
+            "capacity": Number,
+            "_id": String,
+            "createdAt": String,
+            "updatedAt": String,
+            "__v": Number
+        },
+        "updatedAt": String,
+        "__v": Number
     },
     "message": String,
     "success": Boolean
