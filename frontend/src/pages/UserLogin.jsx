@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const UserLogin = () => {
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log(userDetails);
-    setUserDetails({ email: "", password: "" });
+    const userData = {
+      email,
+      password,
+    };
+
+    console.log(userData);
+
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -29,10 +34,8 @@ const UserLogin = () => {
             type="email"
             required
             placeholder="email@example.com"
-            value={userDetails.email}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, email: e.target.value })
-            }
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <h3 className="text-lg mb-2">Enter Password</h3>
           <input
@@ -40,10 +43,8 @@ const UserLogin = () => {
             type="password"
             required
             placeholder="password"
-            value={userDetails.password}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, password: e.target.value })
-            }
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button className="bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg">
             Login

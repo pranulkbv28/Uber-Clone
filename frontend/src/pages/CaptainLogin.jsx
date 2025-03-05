@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const CaptainLogin = () => {
-  const [userDetails, setUserDetails] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    console.log(userDetails);
-    setUserDetails({ email: "", password: "" });
+    const captainData = {
+      email,
+      password,
+    };
+
+    console.log(captainData);
+
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -20,7 +25,7 @@ const CaptainLogin = () => {
         <img
           className="w-16 mb-10"
           src="https://pngimg.com/d/uber_PNG24.png"
-          alt="uber-logo-png"
+          alt="uber-driver-logo-png"
         />
         <form onSubmit={submitHandler}>
           <h3 className="text-lg mb-2">What's your email</h3>
@@ -29,10 +34,8 @@ const CaptainLogin = () => {
             type="email"
             required
             placeholder="email@example.com"
-            value={userDetails.email}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, email: e.target.value })
-            }
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <h3 className="text-lg mb-2">Enter Password</h3>
           <input
@@ -40,10 +43,8 @@ const CaptainLogin = () => {
             type="password"
             required
             placeholder="password"
-            value={userDetails.password}
-            onChange={(e) =>
-              setUserDetails({ ...userDetails, password: e.target.value })
-            }
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <button className="bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg">
             Login
