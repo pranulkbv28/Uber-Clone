@@ -30,11 +30,11 @@ const UserSignup = () => {
   return (
     <div className="h-screen p-7 flex flex-col justify-between">
       <div>
-        <img
+        {/* <img
           className="w-16 mb-10"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt="uber-logo-png"
-        />
+        /> */}
         <form onSubmit={submitHandler}>
           <h3 className="text-base mb-2">What's your name</h3>
           <div className="flex gap-4 mb-5">

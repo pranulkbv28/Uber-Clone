@@ -22,11 +22,11 @@ const CaptainLogin = () => {
   return (
     <div className="h-screen p-7 flex flex-col justify-between">
       <div>
-        <img
+        {/* <img
           className="w-16 mb-10"
           src="https://pngimg.com/d/uber_PNG24.png"
           alt="uber-driver-logo-png"
-        />
+        /> */}
         <form onSubmit={submitHandler}>
           <h3 className="text-lg mb-2">What's your email</h3>
           <input

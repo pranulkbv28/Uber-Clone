@@ -22,11 +22,11 @@ const UserLogin = () => {
   return (
     <div className="h-screen p-7 flex flex-col justify-between">
       <div>
-        <img
+        {/* <img
           className="w-16 mb-10"
           src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
           alt="uber-logo-png"
-        />
+        /> */}
         <form onSubmit={submitHandler}>
           <h3 className="text-lg mb-2">What's your email</h3>
           <input
