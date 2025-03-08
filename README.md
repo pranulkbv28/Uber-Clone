@@ -1,6 +1,6 @@
 # About
 
-This is a Uber Clone application.
+This is a clone of the `Uber` application.
 
 ## Project Pre-requisites
 
