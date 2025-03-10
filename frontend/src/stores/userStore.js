@@ -1,12 +1,10 @@
 import { create } from "zustand";
 
-const userStore = (set) => {
-  return {
-    user: null,
-    setUser: (user) => set((state) => (state.user = user)),
-    removeUser: () => set((state) => (state.user = null)),
-  };
-};
+const userStore = (set) => ({
+  user: null,
+  setUser: (user) => set(() => ({ user })),
+  removeUser: () => set(() => ({ user: null })),
+});
 
 const useUserStore = create(userStore);
 
