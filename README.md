@@ -1,6 +1,6 @@
 # About
 
-This is a Uber Clone application.
+This is a clone of the `Uber` application.
 
 ## Project Pre-requisites
 
@@ -11,3 +11,4 @@ This is a Uber Clone application.
 
 - Clone the repository
 - [**Backend**](./backend/README.md)
+- [**Frontend**](./frontend/README.d)
