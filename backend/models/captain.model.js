@@ -12,7 +12,7 @@ const captainSchema = new Schema(
       },
       lastname: {
         type: String,
-        minlength: [3, "Lastname should be at least 3 characters long"],
+        // minlength: [3, "Lastname should be at least 3 characters long"],
       },
     },
     email: {

@@ -31,21 +31,21 @@ export const registerCaptain = async (req, res) => {
     });
 
     if (!isValidRequest) {
-      throw res
+      return res
         .status(400)
         .json(new ErrorApiResponse(400, "All fields are required"));
     }
 
     const existingCaptain = await Captain.findOne({ email });
     if (existingCaptain) {
-      throw res
+      return res
         .status(400)
         .json(new ErrorApiResponse(400, "Captain already exists"));
     }
 
     const existingVehicle = await Vehicle.findOne({ numberPlate });
     if (existingVehicle) {
-      throw res
+      return res
         .status(400)
         .json(new ErrorApiResponse(400, "Vehicle already exists"));
     }
@@ -59,19 +59,30 @@ export const registerCaptain = async (req, res) => {
       capacity,
     });
 
-    const captain = await Captain.create({
-      fullname: {
-        firstname,
-        lastname,
-      },
-      email,
-      password: hashedPassword,
-      vehicle: vehicle._id,
-    });
+    let captain;
+
+    try {
+      captain = await Captain.create({
+        fullname: {
+          firstname,
+          lastname,
+        },
+        email,
+        password: hashedPassword,
+        vehicle: vehicle._id,
+      });
+    } catch (error) {
+      await Vehicle.findByIdAndDelete(vehicle._id);
+      return res
+        .status(500)
+        .json(new ErrorApiResponse(500, "Captain not created"));
+    }
 
     const token = await captain.generateAuthToken();
 
-    const createdCaptain = Captain.findById(captain._id).select("-password");
+    const createdCaptain = await Captain.findById(captain._id).select(
+      "-password"
+    );
 
     return res
       .status(201)
@@ -83,6 +94,7 @@ export const registerCaptain = async (req, res) => {
         )
       );
   } catch (error) {
+    console.error(`Error: ${error.message}`);
     return res
       .status(500)
       .json(

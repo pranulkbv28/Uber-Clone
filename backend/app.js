@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./db/db.js";
-import authRoutes from "./routes/user.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import captainRoutes from "./routes/captain.routes.js";
 
 dotenv.config({
@@ -18,7 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/v1/user", authRoutes);
+app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/captain", captainRoutes);
 
 app.get("/", (_req, res) => {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useCaptainSignupRenderStore from "../stores/captainSignupRenderStore";
 import useUserStore from "../stores/userStore";
+import useCaptianSignup from "../hooks/useCaptainSignup";
 
 const CaptainSignup = () => {
   const [firstname, setFirstname] = useState("");
@@ -19,6 +20,7 @@ const CaptainSignup = () => {
     removeCaptainSignupRender,
   } = useCaptainSignupRenderStore();
   const { user, setUser } = useUserStore();
+  const { captainSignUp } = useCaptianSignup();
 
   const nextHandler = () => {
     if (!firstname || !lastname || !email || !password) {
@@ -67,6 +69,8 @@ const CaptainSignup = () => {
       numberPlate,
       capacity,
     });
+
+    await captainSignUp(useUserStore.getState().user);
 
     setFirstname("");
     setLastname("");
