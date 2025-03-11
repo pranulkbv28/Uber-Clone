@@ -30,7 +30,7 @@ const useCaptianSignup = () => {
       const createdCaptainData = response.data.data;
       const token = response.data.token;
 
-      console.log("Captain signed up: ", createdCaptainData);
+      console.log("Captain signed up!: ", createdCaptainData);
       console.log("Token: ", token);
     } catch (error) {
       console.error("Error signing up captain: ", error);
